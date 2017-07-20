@@ -1,0 +1,43 @@
+<?php include_once "header.html";?>
+<link href="css/base.css"  rel="stylesheet" type="text/css" />
+<link href="css/news.css"  rel="stylesheet" type="text/css"  />
+<link href="css/animate.min.css" rel="stylesheet" />
+
+	<div class="news_nav nd2"></div>
+	
+    <div class="main_nav">
+        <h4>动态详情</h4>
+    </div>
+
+	<?php
+		$id=isset($_GET["id"])?$_GET["id"]:"0";
+		if($id!="0"){
+			AddClickCount($id);
+		}
+		$newslist=GetNewsDetails($id);
+		if(is_array($newslist)){
+	?>
+		
+    <div class="main">
+    	<h3><?php echo $newslist["title"];?></h3>
+		<p class="futitle">
+			<span><?php echo date("Y-m-d",strtotime($newslist["addtime"]))?></span>
+			<span> 浏览量：<?php echo $newslist["clickcount"];?></span>
+		</p>
+		<div class="pdetails">
+			<?php echo $newslist["content"];?>
+		</div>
+		
+    <?php
+		}
+	?>    
+	
+    </div>
+<?php include_once "footer.html";?>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.main_nav').addClass('bounceInRight animated');
+		$('.main').addClass('lightSpeedIn animated');
+	});
+</script>

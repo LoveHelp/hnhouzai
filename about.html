@@ -1,0 +1,49 @@
+<?php include_once "header.html";?>
+<link href="css/base.css"  rel="stylesheet" type="text/css" />
+<link href="css/about.css"  rel="stylesheet" type="text/css"  />
+<link href="css/animate.min.css" rel="stylesheet" />
+
+	<div class="news_nav"></div>
+	
+    <div class="main_nav">
+        <h4>关于我们</h4>
+    </div>
+		
+    <div class="main">
+    	<div class="dmap" id="BaiduDitu">
+			<!-- <img alt="" src="img/map1.jpg"/> -->
+		</div> 
+		<div class="ddecription">
+			<h5>您也可以通过以下方式联系我们</h5>
+			<p style="margin-top:20px;">地址：河南省南阳市南都路与范蠡路交叉口儒林星座B厅609室</p>
+			<p>客服QQ：251335061</p>
+			<p>电话：0377-66557877</p>			
+			<p>邮箱：251335061@qq.com</p>
+		</div>  
+    </div>
+<?php include_once "footer.html";?>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.main_nav').addClass('bounceInRight animated');
+		$('.main').addClass('lightSpeedIn animated');
+	});
+</script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=e3ZohdqyB0RL98hFOiC29xqh"></script>
+<script type="text/javascript">
+    //创建地图函数：
+    function createMap(){
+        // 百度地图API功能
+		var sContent ="<p style='padding:10px;padding-right:30px;'>地址：河南省南阳市南都路与范蠡路交叉口儒林星座B厅609室</P>";
+		var map = new BMap.Map("BaiduDitu");
+		var point = new BMap.Point(112.586848,33.019553);
+		map.centerAndZoom(point, 15);
+		var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+		map.openInfoWindow(infoWindow,point); //开启信息窗口        
+	}
+    $(function(){
+        createMap();//创建和初始化地图
+    });
+			
+	
+</script>

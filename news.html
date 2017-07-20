@@ -1,0 +1,52 @@
+<?php include_once "header.html";?>
+<link href="css/base.css"  rel="stylesheet" type="text/css" />
+<link href="css/news.css"  rel="stylesheet" type="text/css" />
+<link href="css/animate.min.css" rel="stylesheet" />
+
+	<div class="news_nav"></div>
+    
+    <div class="main_nav">
+        <h4>业务动态</h4>
+    </div>
+
+    <div class="main">
+		
+		<?php
+			$newslist=GetNewsList();
+			if(is_array($newslist)){
+				foreach($newslist as $list){
+		?>
+					<div class="news_list">
+						<a href="?m=news_details&v=news_details&id=<?php echo $list["id"]?>" class="aimg"><img alt="" src="<?php echo $list["coverpic"]?>" /></a>
+						<div class="news_content">
+							<div class="dtitle">
+								<h4><a href="?m=news_details&v=news_details&id=<?php echo $list["id"]?>"><?php echo $list["title"]?></a></h4>
+								<span><?php echo date("Y-m-d",strtotime($list["addtime"]))?></span>
+							</div>
+							<p class="pcontent">
+								<?php 
+									$content=$list["content"];
+									$content=strip_tags($content);
+									$content=mb_substr($content,0,180,'utf-8');
+									if(mb_strlen($content)>=180){
+										$content.="...";
+									}
+									echo $content;
+								?>
+							</p>
+						</div>
+					</div>
+		<?php
+				}
+			}
+		?>
+        
+    </div>
+<?php include_once "footer.html";?>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.main_nav').addClass('bounceInRight animated');
+		$('.main').addClass('fadeInRightBig animated');
+	});
+</script>
